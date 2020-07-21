@@ -65,6 +65,31 @@ sudo yum install -y \
     unzip \
     wget
 
+ 
+################################################################################
+### AWS SSM Agent ##############################################################
+################################################################################
+
+sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+ 
+################################################################################
+### AWS Inspector Agent ########################################################
+################################################################################
+
+# Download the agent installation script
+wget https://inspector-agent.amazonaws.com/linux/latest/install
+# Install and turn off and auto-update process  
+sudo bash install -u false
+# Remove the agent installation script
+rm install
+
+################################################################################
+### AWS CloudWatch Agent ########################################################
+################################################################################
+
+# Download the agent installation script
+sudo yum install -y https://s3.us-east-1.amazonaws.com/amazoncloudwatch-agent-us-east-1/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm
+
 # Remove the ec2-net-utils package, if it's installed. This package interferes with the route setup on the instance.
 if yum list installed | grep ec2-net-utils; then sudo yum remove ec2-net-utils -y -q; fi
 
